@@ -23,4 +23,4 @@ Meus dotfiles estão organizados de forma modular e incluem:
 
 ## 🖥️ Configuração do Hyprland
 
-Utilizo o ambiente de trabalho Hyprland configurado com o script disponível no repositório ML4W. Este setup oferece uma experiência leve e altamente customizável para gerenciar minhas janelas e fluxos de trabalho.
+Utilizo o ambiente de trabalho [Hyprland](https://github.com/hyprwm/Hyprland) configurado com o script disponível no repositório [ML4W](https://github.com/mylinuxforwork/dotfiles). Este setup oferece uma experiência leve e altamente customizável para gerenciar minhas janelas e fluxos de trabalho.
