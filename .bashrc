@@ -21,10 +21,9 @@ if [ -d ~/.config/bashrc/custom ] ;then
 else
     for f in ~/.config/bashrc/*; do source $f; done
 fi
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(fzf --bash)"
-alias cls=clear
-alias e=exit
-alias v=nvim
-eval "$(zoxide init bash)"
+# Enable bash programmable completion features in interactive shells
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+	. /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+	. /etc/bash_completion
+fi
