@@ -4,6 +4,16 @@
 set -e fish_user_paths
 set -U fish_user_paths $HOME/.bin  $HOME/.local/bin $HOME/.config/emacs/bin $HOME/Applications /var/lib/flatpak/exports/bin/ $fish_user_paths
 
+# The next line updates PATH for the Google Cloud SDK.
+if test -f '/opt/google-cloud-sdk/path.fish.inc'
+    source '/opt/google-cloud-sdk/path.fish.inc'
+end
+
+# The next line enables shell command completion for gcloud.
+if test -f '/opt/google-cloud-sdk/completion.fish.inc'
+    source '/opt/google-cloud-sdk/completion.fish.inc'
+end
+
 ### EXPORT ###
 set fish_greeting                                 # Supresses fish's intro message
 set TERM "xterm-256color"                         # Sets the terminal type
@@ -19,10 +29,20 @@ set -x MANPAGER "nvim +Man!"
 ### "less" as manpager
 # set -x MANPAGER "less"
 
+### Set Cursor insert
+
+
 ### SET EITHER DEFAULT EMACS MODE OR VI MODE ###
-function fish_user_key_bindings
-  # fish_default_key_bindings
-  fish_vi_key_bindings
+if status is-interactive
+  set fish_cursor_default block blink
+  set fish_cursor_insert line blink
+  set fish_cursor_replace_one underscore blink
+  set fish_cursor_visual block
+
+  function fish_user_key_bindings
+    fish_default_key_bindings -M insert
+    fish_vi_key_bindings --no-erase insert
+  end
 end
 ### END OF VI MODE ###
 
@@ -34,6 +54,13 @@ set fish_color_error '#ff6c6b'
 set fish_color_param brcyan
 
 ### FUNCTIONS ###
+
+#Converter mkv para mp4
+function mkv_to_mp4
+    for i in *.mkv
+        ffmpeg -i "$i" (string replace -r '\.mkv$' '.mp4' "$i")
+    end
+end
 
 # Copiar para o servidor
 function copy_to_server
@@ -183,7 +210,7 @@ function mkdirgo
     set dirname $argv[1]
     mkdir -p $dirname
     and cd $dirname
-    and go mod init $dirname
+    and go mod init github.com/wanderlei2583/$dirname
     and echo "package main
 
 import \"fmt\"
@@ -289,11 +316,14 @@ alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/mas
 alias mocp="bash -c mocp"
 
 # ALias pessoal
+alias f=fish
 alias e='exit'
-alias cls='clear'
+alias c='clear'
 alias v='nvim'
 alias efis='v ~/.config/fish/config.fish'
 alias av='source env/bin/activate.fish'
+#alias rsync='rsync --progress'
+alias rsync='rsync --info=progress2'
 
 alias env='python3 -m venv env'
 
@@ -307,3 +337,7 @@ zoxide init fish | source
 
 ### SETTING THE STARSHIP PROMPT ###
 starship init fish | source
+
+#HomeBrew
+eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+

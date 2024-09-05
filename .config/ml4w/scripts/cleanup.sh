@@ -1,15 +1,8 @@
 #!/bin/bash
 clear
-cat <<"EOF"
-  ____ _                                
- / ___| | ___  __ _ _ __    _   _ _ __  
-| |   | |/ _ \/ _` | '_ \  | | | | '_ \ 
-| |___| |  __/ (_| | | | | | |_| | |_) |
- \____|_|\___|\__,_|_| |_|  \__,_| .__/ 
-                                 |_|    
-
-EOF
-
+aur_helper="$(cat ~/.config/ml4w/settings/aur.sh)"
+figlet -f smslant "Updates"
+echo
 sudo pacman -Rns $(pacman -Qtdq)
 
-yay -Scc
+$aur_helper -Scc

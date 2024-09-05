@@ -2,7 +2,7 @@
 size = 12.0
 
 [font.normal]
-family = "Jetbrains Mono NF"
+family = "FiraCode Nerd Font"
 style = "Regular"
 
 [window]
@@ -14,5 +14,3 @@ y = 15
 
 [selection]
 save_to_clipboard = true
-
-

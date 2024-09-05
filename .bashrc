@@ -12,18 +12,25 @@
 
 # You can define your custom configuration by adding
 # files in ~/.config/bashrc 
-# or by creating a folder ~/.config/bashrc/custom
-# with you own bashrc configuration
+# or by creating a folder ~/.config/zshrc/custom
+# with copies of files from ~/.config/zshrc 
 # -----------------------------------------------------
 
-if [ -d ~/.config/bashrc/custom ] ;then
-    for f in ~/.config/bashrc/custom/*; do source $f; done
-else
-    for f in ~/.config/bashrc/*; do source $f; done
-fi
-# Enable bash programmable completion features in interactive shells
-if [ -f /usr/share/bash-completion/bash_completion ]; then
-	. /usr/share/bash-completion/bash_completion
-elif [ -f /etc/bash_completion ]; then
-	. /etc/bash_completion
-fi
+for f in ~/.config/bashrc/*; do 
+    if [ ! -d $f ] ;then
+        c=`echo $f | sed -e "s=.config/bashrc=.config/bashrc/custom="`
+        [[ -f $c ]] && source $c || source $f
+    fi
+done
+
+# Flutter Setup By AR Rahman(Heartless)
+export PATH="/home/wrp/Android/flutter/bin:$PATH"
+export ANDROID_HOME="$HOME/Android/Sdk"
+export ANDROID_TOOLS="$HOME/Android/Sdk/cmdline-tools/latest"
+export ANDROID_PLATFORM_TOOLS="$HOME/Android/Sdk/platform-tools"
+PATH="$PATH:$ANDROID_HOME:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS"
+# Chrome Setup
+export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
+
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

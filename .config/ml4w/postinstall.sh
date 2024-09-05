@@ -37,7 +37,7 @@ _isInstalledPacman() {
 }
 
 echo -e "${GREEN}"
-figlet "Post Install"
+figlet -f smslant "Post Install"
 echo -e "${NONE}"
 echo ":: The script helps you to install additional packages for your ML4W Dotfiles."
 echo
@@ -47,6 +47,9 @@ reboot=0
 if [[ $(_isInstalledPacman "xdg-desktop-portal-gtk") == 0 ]]; then
     echo ":: xdg-desktop-portal-gtk already installed"
 else
+    echo -e "${GREEN}"
+    figlet -f smslant "Portal GTK"
+    echo -e "${NONE}"
     echo "xdg-desktop-portal-gtk is required to use dark mode in GTK4 Apps." 
     echo
     if gum confirm "Do you want to install xdg-desktop-portal-gtk?"; then
@@ -61,36 +64,22 @@ else
     fi
 fi
 
-# Check for flatpak
-if [[ $(_isInstalledPacman "flatpak") == 0 ]]; then
-    echo ":: Flatpak already installed"
-else
-    echo "Flatpak is a framework for distributing desktop applications across various Linux distributions." 
-    echo "Flatpak applications: these are the applications the user installs via the flatpak command"
-    echo
-    if gum confirm "Do you want to install flatpak?"; then
-        _installPackagesPacman "flatpak";
-    elif [ $? -eq 130 ]; then
-        echo ":: Installation canceled."
-        exit 130
-    else
-        echo ":: Installation of flatpak skipped."
-    fi
-fi
+# Select shell
+source ~/.config/ml4w/scripts/shell.sh
 
-if [[ $reboot == "1" ]] ;then
-    echo -e "${GREEN}"
-    figlet "Reboot"
-    echo -e "${NONE}"
-    echo "A reboot of your system is recommended."
-    echo
-    if gum confirm "Do you want to reboot your system now?" ;then
-        gum spin --spinner dot --title "Rebooting now..." -- sleep 3
-        systemctl reboot
-    elif [ $? -eq 130 ]; then
-        exit 130
-    else
-        gum spin --spinner dot --title "Reboot skipped..." -- sleep 3
-    fi
-    echo ""
+# Reboot
+clear
+echo -e "${GREEN}"
+figlet -f smslant "Reboot"
+echo -e "${NONE}"
+echo "A reboot of your system is recommended."
+echo
+if gum confirm "Do you want to reboot your system now?" ;then
+    gum spin --spinner dot --title "Rebooting now..." -- sleep 3
+    systemctl reboot
+elif [ $? -eq 130 ]; then
+    exit 130
+else
+    gum spin --spinner dot --title "Reboot skipped..." -- sleep 3
 fi
+echo ""

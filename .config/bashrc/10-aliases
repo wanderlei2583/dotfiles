@@ -5,6 +5,8 @@
 # -----------------------------------------------------
 # General
 # -----------------------------------------------------
+alias e='exit'
+alias f='fish'
 alias c='clear'
 alias nf='fastfetch'
 alias pf='fastfetch'
@@ -18,9 +20,6 @@ alias vim='$EDITOR'
 alias ts='~/.config/ml4w/scripts/snapshot.sh'
 alias wifi='nmtui'
 alias cleanup='~/.config/ml4w/scripts/cleanup.sh'
-alias e=exit
-alias v=nvim
-alias spac="sudo pacman -S $@"
 
 # -----------------------------------------------------
 # ML4W Apps

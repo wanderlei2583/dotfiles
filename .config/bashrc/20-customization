@@ -11,8 +11,3 @@ eval "$(starship init bash)"
 # Pywal
 # -----------------------------------------------------
 cat ~/.cache/wal/sequences
-
-# Brew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-eval "$(fzf --bash)"
-eval "$(zoxide init bash)"
