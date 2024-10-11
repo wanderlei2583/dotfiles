@@ -1,10 +1,15 @@
 # -----------------------------------------------------
 # ALIASES
 # -----------------------------------------------------
-
+#yt-dlp aliases
+alias ydl='yt-dlp'
+alias ydlmp3='yt-dlp -S abr -f ba'
+alias ydlmp4='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
+alias ydlmkv='yt-dlp -f "bestvideo[ext=mkv]+bestaudio[ext=mka]/best[ext=mkv]/best"'
 # -----------------------------------------------------
 # General
 # -----------------------------------------------------
+alias t='tmux'
 alias e='exit'
 alias f='fish'
 alias c='clear'

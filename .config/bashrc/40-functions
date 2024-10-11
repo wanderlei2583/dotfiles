@@ -22,6 +22,26 @@ extract() {
 	done
 }
 
+# Função para o yt-dlp
+youtube_download() {
+    local id="$1"
+    local type
+    local title
+    
+    # Verifica se é uma playlist
+    if [[ "$id" == *"list="* ]]; then
+        type="playlist"
+        # Extrai o título da playlist
+        title=$(yt-dlp --get-title --playlist-items 1 "$id" | sed 's/[^[:alnum:][:space:]]/_/g' | tr -s ' ' '_')
+        ydlmp3 -o "~/Músicas/Playlists/$title/%(title)s.%(ext)s" "$id"
+    else
+        type="video"
+        ydlmp4 -o "~/Vídeos/YouTube/%(title)s.%(ext)s" "$id"
+    fi
+    
+    echo "Download concluído: $type - $title"
+}
+
 # Searches for text in all files in the current folder
 ftext() {
 	# -i case-insensitive

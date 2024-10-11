@@ -1,1 +1,1 @@
-/ml4w-blur;/ml4w-blur/mixed
+/ml4w;/ml4w/mixed

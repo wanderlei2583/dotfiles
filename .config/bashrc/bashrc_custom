@@ -15,3 +15,10 @@ tnew() {
         -c ${session_dir} \
         -n ${session_window_name}
 }
+
+rename_series() {
+    local season=$1
+    local ext=$2
+    find . -type f -name "*.$ext" | sort | awk -v season="$season" -v ext="$ext" '{ printf "mv \"%s\" S%02dE%02d.%s\n", $0, season, NR, ext }' | bash
+}
+

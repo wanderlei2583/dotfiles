@@ -2,7 +2,7 @@
 # First line removes the path; second line sets it.  Without the first line,
 # your path gets massive and fish becomes very slow.
 set -e fish_user_paths
-set -U fish_user_paths $HOME/.bin  $HOME/.local/bin $HOME/.config/emacs/bin $HOME/Applications /var/lib/flatpak/exports/bin/ $fish_user_paths
+set -U fish_user_paths $HOME/.bin $HOME/.local/bin $HOME/.config/emacs/bin $HOME/Applications /var/lib/flatpak/exports/bin/ $fish_user_paths
 
 # The next line updates PATH for the Google Cloud SDK.
 if test -f '/opt/google-cloud-sdk/path.fish.inc'
@@ -15,10 +15,15 @@ if test -f '/opt/google-cloud-sdk/completion.fish.inc'
 end
 
 ### EXPORT ###
-set fish_greeting                                 # Supresses fish's intro message
-set TERM "xterm-256color"                         # Sets the terminal type
-set EDITOR "emacsclient -t -a ''"                 # $EDITOR use Emacs in terminal
-set VISUAL "emacsclient -c -a emacs"              # $VISUAL use Emacs in GUI mode
+set fish_greeting # Supresses fish's intro message
+set TERM xterm-256color # Sets the terminal type
+set -Ux EDITOR nvim
+set -Ux VISUAL nvim
+
+# Golang 
+set -Ux GOPATH $HOME/go
+set -Ux GOBIN $GOPATH/bin
+set -Ux PATH $GOBIN:$PATH
 
 ### SET MANPAGER
 ### Uncomment only one of these!
@@ -34,15 +39,15 @@ set -x MANPAGER "nvim +Man!"
 
 ### SET EITHER DEFAULT EMACS MODE OR VI MODE ###
 if status is-interactive
-  set fish_cursor_default block blink
-  set fish_cursor_insert line blink
-  set fish_cursor_replace_one underscore blink
-  set fish_cursor_visual block
+    set fish_cursor_default block blink
+    set fish_cursor_insert line blink
+    set fish_cursor_replace_one underscore blink
+    set fish_cursor_visual block
 
-  function fish_user_key_bindings
-    fish_default_key_bindings -M insert
-    fish_vi_key_bindings --no-erase insert
-  end
+    function fish_user_key_bindings
+        fish_default_key_bindings -M insert
+        fish_vi_key_bindings --no-erase insert
+    end
 end
 ### END OF VI MODE ###
 
@@ -62,18 +67,55 @@ function mkv_to_mp4
     end
 end
 
+# Função para o yt-dlp 
+function youtube_download
+    set id $argv[1]
+    set type ""
+    set title ""
+
+    # Verifica se é uma playlist
+    if string match -q "*list=*" $id
+        set type playlist
+        # Extrai o título da playlist
+        set title (yt-dlp --get-title --playlist-items 1 $id | string replace -r '[^\w\s]' '_' | string replace -r '\s+' '_')
+        ydlmp3 -o "~/Músicas/Playlists/$title/%(title)s.%(ext)s" $id
+    else
+        set type video
+        ydlmp4 -o "~/Vídeos/YouTube/%(title)s.%(ext)s" $id
+    end
+
+    echo "Download concluído: $type - $title"
+end
+
+#  Criar uma nova sessão tmux.
+function tnew
+    set -l session_name $argv[1]
+    set -l session_dir $argv[2]
+    set -l session_window_name $argv[3]
+
+    # Set default values if not provided
+    test -z "$session_name" && set session_name new
+    test -z "$session_dir" && set session_dir "$HOME/Dev"
+    test -z "$session_window_name" && set session_window_name main
+
+    tmux new-session \
+        -d \
+        -s $session_name \
+        -c $session_dir \
+        -n $session_window_name
+end
 # Copiar para o servidor
 function copy_to_server
     set source_path $argv[1]
     set content_type $argv[2]
-    set server_user "wander"
+    set server_user wander
     set server_ip "192.168.1.106"
     set server_path ""
 
-    if test "$content_type" = "filmes"
-        set server_path "/mnt/videos/filmes/"
-    else if test "$content_type" = "series"
-        set server_path "/mnt/videos/series/"
+    if test "$content_type" = filmes
+        set server_path /mnt/videos/filmes/
+    else if test "$content_type" = series
+        set server_path /mnt/videos/series/
     else
         echo "Tipo de conteúdo inválido. Escolha 'filmes' ou 'series'."
         return 1
@@ -84,31 +126,32 @@ end
 
 # Functions needed for !! and !$
 function __history_previous_command
-  switch (commandline -t)
-  case "!"
-    commandline -t $history[1]; commandline -f repaint
-  case "*"
-    commandline -i !
-  end
+    switch (commandline -t)
+        case "!"
+            commandline -t $history[1]
+            commandline -f repaint
+        case "*"
+            commandline -i !
+    end
 end
 
 function __history_previous_command_arguments
-  switch (commandline -t)
-  case "!"
-    commandline -t ""
-    commandline -f history-token-search-backward
-  case "*"
-    commandline -i '$'
-  end
+    switch (commandline -t)
+        case "!"
+            commandline -t ""
+            commandline -f history-token-search-backward
+        case "*"
+            commandline -i '$'
+    end
 end
 
 # The bindings for !! and !$
-if [ "$fish_key_bindings" = "fish_vi_key_bindings" ];
-  bind -Minsert ! __history_previous_command
-  bind -Minsert '$' __history_previous_command_arguments
+if [ "$fish_key_bindings" = fish_vi_key_bindings ]
+    bind -Minsert ! __history_previous_command
+    bind -Minsert '$' __history_previous_command_arguments
 else
-  bind ! __history_previous_command
-  bind '$' __history_previous_command_arguments
+    bind ! __history_previous_command
+    bind '$' __history_previous_command_arguments
 end
 
 # Function for creating a backup file
@@ -124,8 +167,8 @@ end
 function copy
     set count (count $argv | tr -d \n)
     if test "$count" = 2; and test -d "$argv[1]"
-	set from (echo $argv[1] | trim-right /)
-	set to (echo $argv[2])
+        set from (echo $argv[1] | trim-right /)
+        set to (echo $argv[2])
         command cp -r $from $to
     else
         command cp $argv
@@ -196,7 +239,7 @@ function copy_with_pv
         tar cf - -C (dirname "$origem") (basename "$origem") | pv | tar xf - -C "$destino"
     else
         # Se origem for um arquivo, use pv diretamente
-        pv "$origem" > "$destino"/(basename "$origem")
+        pv "$origem" >"$destino"/(basename "$origem")
     end
 end
 
@@ -217,10 +260,15 @@ import \"fmt\"
 
 func main() {
     fmt.Println(\"Hello, World!\")
-}" > main.go
+}" >main.go
     and echo "Pasta '$dirname' criada e ambiente Go inicializado."
 end
 
+function rename_series
+    set season $argv[1]
+    set ext $argv[2]
+    find . -type f -name "*.$ext" | sort | awk -v season="$season" -v ext="$ext" '{ printf "mv \"%s\" S%02dE%02d.%s\n", $0, season, NR, ext }' | bash
+end
 ### END OF FUNCTIONS ###
 
 
@@ -240,8 +288,8 @@ alias rem="killall emacs || echo 'Emacs server not running'; /usr/bin/emacs --da
 
 # Changing "ls" to "eza"
 alias ls='eza -al --color=always --group-directories-first' # my preferred listing
-alias la='eza -a --color=always --group-directories-first'  # all files and dirs
-alias ll='eza -l --color=always --group-directories-first'  # long format
+alias la='eza -a --color=always --group-directories-first' # all files and dirs
+alias ll='eza -l --color=always --group-directories-first' # long format
 alias lt='eza -aT --color=always --group-directories-first' # tree listing
 alias l.='eza -a | egrep "^\."'
 alias l.='eza -al --color=always --group-directories-first ../' # ls on the PARENT directory
@@ -249,12 +297,12 @@ alias l..='eza -al --color=always --group-directories-first ../../' # ls on dire
 alias l...='eza -al --color=always --group-directories-first ../../../' # ls on directory 3 levels up
 
 # pacman and yay
-alias pacsyu='sudo pacman -Syu'                  # update only standard pkgs
-alias pacsyyu='sudo pacman -Syyu'                # Refresh pkglist & update standard pkgs
-alias parsua='paru -Sua --noconfirm'             # update only AUR pkgs (paru)
-alias parsyu='paru -Syu --noconfirm'             # update standard pkgs and AUR pkgs (paru)
-alias unlock='sudo rm /var/lib/pacman/db.lck'    # remove pacman lock
-alias orphan='sudo pacman -Rns (pacman -Qtdq)'  # remove orphaned packages (DANGEROUS!)
+alias pacsyu='sudo pacman -Syu' # update only standard pkgs
+alias pacsyyu='sudo pacman -Syyu' # Refresh pkglist & update standard pkgs
+alias parsua='paru -Sua --noconfirm' # update only AUR pkgs (paru)
+alias parsyu='paru -Syu --noconfirm' # update standard pkgs and AUR pkgs (paru)
+alias unlock='sudo rm /var/lib/pacman/db.lck' # remove pacman lock
+alias orphan='sudo pacman -Rns (pacman -Qtdq)' # remove orphaned packages (DANGEROUS!)
 
 # get fastest mirrors
 alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
@@ -263,8 +311,8 @@ alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/p
 alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
 
 # adding flags
-alias df='df -h'               # human-readable sizes
-alias free='free -m'           # show sizes in MB
+alias df='df -h' # human-readable sizes
+alias free='free -m' # show sizes in MB
 alias grep='grep --color=auto' # colorize output (good for log files)
 
 # ps
@@ -275,6 +323,15 @@ alias pscpu='ps auxf | sort -nr -k 3'
 
 # Merge Xresources
 alias merge='xrdb -merge ~/.Xresources'
+
+#yt-dlp aliases
+alias ydl='yt-dlp'
+alias ydlmp3='yt-dlp -S abr -f ba'
+alias ydlmp4='yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best"'
+alias ydlmkv='yt-dlp -f "bestvideo[ext=mkv]+bestaudio[ext=mka]/best[ext=mkv]/best"'
+
+# download youtube video
+alias ytdv="python3 ~/scripts/python/youtubeDown.py"
 
 # git
 alias addup='git add -u'
@@ -340,4 +397,3 @@ starship init fish | source
 
 #HomeBrew
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
