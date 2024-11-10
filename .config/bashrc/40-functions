@@ -54,6 +54,11 @@ ftext() {
 	grep -iIHrn --color=always "$1" . | less -r
 }
 
+# Gerando commit de forma automatizada.
+cmm(){
+  git diff | cody chat --stdin -m 'Write a commit message for this diff'
+}
+
 # Copy file with a progress bar
 cpp() {
     set -e

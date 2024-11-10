@@ -60,6 +60,28 @@ set fish_color_param brcyan
 
 ### FUNCTIONS ###
 
+# Funções para o migrate
+function migrate-up
+    migrate -path=./migrations -database "postgresql://postgres:postgres@localhost:5432/db_pedidos?sslmode=disable" up
+end
+
+function migrate-down
+    migrate -path=./migrations -database "postgresql://postgres:postgres@localhost:5432/db_pedidos?sslmode=disable" down
+end
+
+function migrate-status
+    migrate -path=./migrations -database "postgresql://postgres:postgres@localhost:5432/db_pedidos?sslmode=disable" version
+end
+
+function migrate-create
+    read -l -P "Nome da migration: " name
+    migrate create -ext sql -dir migrations -seq $name
+end
+
+function ccm 
+  git diff | cody chat --stdin -m 'Write a commit message for this diff'
+end
+
 #Converter mkv para mp4
 function mkv_to_mp4
     for i in *.mkv

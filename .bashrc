@@ -34,3 +34,9 @@ export CHROME_EXECUTABLE=/usr/bin/google-chrome-stable
 
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/wrp/google-cloud-sdk/path.bash.inc' ]; then . '/home/wrp/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/wrp/google-cloud-sdk/completion.bash.inc' ]; then . '/home/wrp/google-cloud-sdk/completion.bash.inc'; fi
