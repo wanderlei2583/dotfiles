@@ -1,0 +1,165 @@
+# # !/bin/env shell
+
+## custom functions
+# -----------------------------------------------------
+# Função para ativar venv para Zsh
+# -----------------------------------------------------
+function av() {
+    local venv_dirs=(".venv" "venv" ".env" "env")
+    local activated=0
+
+    for dir in $venv_dirs; do
+        if [[ -f "$dir/bin/activate" ]]; then
+            source "$dir/bin/activate"
+            activated=1
+            break
+        fi
+    done
+
+    if [[ $activated -eq 0 ]]; then
+        echo "Nenhum ambiente virtual encontrado!"
+        echo "Deseja criar um novo? [s/N]"
+        read -r create
+        if [[ "$create" =~ ^[Ss]$ ]]; then
+            python3 -m venv .venv
+            source .venv/bin/activate
+            pip install --upgrade pip
+            echo "\nAmbiente virtual criado e ativado em .venv/"
+        fi
+    fi
+}
+
+function dv() {
+  deactivate
+}
+
+dotfiles ()
+{
+  git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
+}
+
+rename_series() {
+    local season=$1
+    local ext=$2
+    find . -type f -name "*.$ext" | sort | awk -v season="$season" -v ext="$ext" '{ printf "mv \"%s\" S%02dE%02d.%s\n", $0, season, NR, ext }' | bash
+}
+
+tnew() {
+    local session_name="${1:-new}"
+    local session_dir=${2:-~/}
+    local session_window_name="${3:-main}"
+
+    tmux new-session \
+        -d \
+        -s ${session_name} \
+        -c ${session_dir} \
+        -n ${session_window_name}
+}
+# Criar e entrar em um diretório
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Buscar processo por nome
+findp() {
+    ps aux | grep "$1"
+}
+
+# Criar um novo projeto Go
+gonew() {
+    mkdir -p "$1" && cd "$1" && go mod init "$1"
+}
+
+# Limpar containers e imagens Docker não utilizados
+dcleanall() {
+    docker system prune -af
+    docker volume prune -f
+    docker network prune -f
+}
+
+# Função para criar um novo projeto Node.js
+nodenew() {
+    mkdir -p "$1" && cd "$1" && npm init -y
+}
+## custom aliases
+alias e=exit
+alias f=fish
+alias d=dotfiles
+alias l="ls -la"
+alias s="source ~/.zshrc"
+# Aliases para Desenvolvimento
+alias v='nvim'
+alias vim='nvim'
+alias t='tmux'
+alias ta='tmux attach'
+alias tn='tmux new -s'
+alias tls='tmux ls'
+
+# Docker aliases
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias dstat='docker stats'
+alias dlogs='docker logs'
+alias dexec='docker exec -it'
+alias dclean='docker system prune -af'
+
+# Docker Compose
+alias dcu='docker-compose up'
+alias dcud='docker-compose up -d'
+alias dcd='docker-compose down'
+alias dcl='docker-compose logs -f'
+
+# Git aliases
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git pull'
+alias gco='git checkout'
+alias gb='git branch'
+alias glog='git log --oneline --graph --decorate'
+
+# Python aliases
+alias py='python'
+alias py3='python3'
+alias pip='pip3'
+alias venv='python -m venv venv'
+alias activate='source venv/bin/activate'
+
+# Node.js aliases
+alias n='npm'
+alias nr='npm run'
+alias ni='npm install'
+alias nid='npm install --save-dev'
+alias nout='npm outdated'
+
+# Go aliases
+alias gr='go run'
+alias gt='go test'
+alias gm='go mod'
+alias gtidy='go mod tidy'
+
+# Make
+alias m='make'
+alias mb='make build'
+alias mt='make test'
+alias mr='make run'
+
+# Utilitários
+alias ll='ls -lah'
+alias cl='clear'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias reload='source ~/.zshrc'
+## exports 
+export PATH="$HOME/.local/bin:$PATH"
+export ANDROID_HOME=$HOME/android-sdk
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+
+## evaluators
+eval "$(zoxide init bash)"
+

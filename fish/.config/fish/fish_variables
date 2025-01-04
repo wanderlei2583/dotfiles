@@ -1,0 +1,48 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export EDITOR:nvim
+SETUVAR --export GOBIN:/home/wrp/go/bin
+SETUVAR --export --path GOPATH:/home/wrp/go
+SETUVAR --export --path PATH:/home/wrp/go/bin\x1e/home/wrp/\x2ebin\x1e/home/wrp/go/bin\x1e/home/wrp/\x2elocal/bin\x1e/home/wrp/go/bin\x1e/home/wrp/\x2econfig/emacs/bin\x1e/home/wrp/go/bin\x1e/home/wrp/Applications\x1e/home/wrp/go/bin\x1e/var/lib/flatpak/exports/bin/\x1e/home/wrp/go/bin\x1e/usr/lib/ccache/bin/\x1e/home/wrp/go/bin\x1e/nix/store/g2sz808xw5hf88hf21hcw58c0pgb95wi\x2dkitty\x2d0\x2e37\x2e0/bin\x1e/home/wrp/go/bin\x1e/nix/store/fk45sni24m102vryyygk4pkrjvmaw02r\x2dimagemagick\x2d7\x2e1\x2e1\x2d40/bin\x1e/home/wrp/go/bin\x1e/nix/store/iiyi3qckyv3afbyn8wmrbj3y8faf6dl3\x2dncurses\x2d6\x2e4\x2e20221231\x2ddev/bin\x1e/home/wrp/go/bin\x1e/run/wrappers/bin\x1e/home/wrp/go/bin\x1e/home/wrp/\x2elocal/share/flatpak/exports/bin\x1e/home/wrp/go/bin\x1e/var/lib/flatpak/exports/bin\x1e/home/wrp/go/bin\x1e/home/wrp/\x2enix\x2dprofile/bin\x1e/home/wrp/go/bin\x1e/nix/profile/bin\x1e/home/wrp/go/bin\x1e/home/wrp/\x2elocal/state/nix/profile/bin\x1e/home/wrp/go/bin\x1e/etc/profiles/per\x2duser/wrp/bin\x1e/home/wrp/go/bin\x1e/nix/var/nix/profiles/default/bin\x1e/home/wrp/go/bin\x1e/run/current\x2dsystem/sw/bin\x1e/home/wrp/go/bin\x1e/home/wrp/android\x2dsdk/platform\x2dtools
+SETUVAR --export VISUAL:nvim
+SETUVAR __fish_initialized:3400
+SETUVAR fish_color_autosuggestion:\x237d7d7d
+SETUVAR fish_color_cancel:ff5555\x1e\x2d\x2dreverse
+SETUVAR fish_color_command:brcyan
+SETUVAR fish_color_comment:6272a4
+SETUVAR fish_color_cwd:50fa7b
+SETUVAR fish_color_cwd_root:red
+SETUVAR fish_color_end:ffb86c
+SETUVAR fish_color_error:\x23ff6c6b
+SETUVAR fish_color_escape:ff79c6
+SETUVAR fish_color_history_current:\x2d\x2dbold
+SETUVAR fish_color_host:bd93f9
+SETUVAR fish_color_host_remote:\x1d
+SETUVAR fish_color_keyword:\x1d
+SETUVAR fish_color_match:\x2d\x2dbackground\x3dbrblue
+SETUVAR fish_color_normal:brcyan
+SETUVAR fish_color_operator:50fa7b
+SETUVAR fish_color_option:\x1d
+SETUVAR fish_color_param:brcyan
+SETUVAR fish_color_quote:f1fa8c
+SETUVAR fish_color_redirection:f8f8f2
+SETUVAR fish_color_search_match:\x2d\x2dbackground\x3d44475a
+SETUVAR fish_color_selection:\x2d\x2dbackground\x3d44475a
+SETUVAR fish_color_status:red
+SETUVAR fish_color_user:8be9fd
+SETUVAR fish_color_valid_path:\x2d\x2dunderline
+SETUVAR fish_key_bindings:fish_vi_key_bindings
+SETUVAR fish_pager_color_background:\x1d
+SETUVAR fish_pager_color_completion:f8f8f2
+SETUVAR fish_pager_color_description:6272a4
+SETUVAR fish_pager_color_prefix:8be9fd
+SETUVAR fish_pager_color_progress:6272a4
+SETUVAR fish_pager_color_secondary_background:\x1d
+SETUVAR fish_pager_color_secondary_completion:\x1d
+SETUVAR fish_pager_color_secondary_description:\x1d
+SETUVAR fish_pager_color_secondary_prefix:\x1d
+SETUVAR fish_pager_color_selected_background:\x2d\x2dbackground\x3d44475a
+SETUVAR fish_pager_color_selected_completion:f8f8f2
+SETUVAR fish_pager_color_selected_description:6272a4
+SETUVAR fish_pager_color_selected_prefix:8be9fd
+SETUVAR fish_user_paths:/home/wrp/\x2ebin\x1e/home/wrp/\x2elocal/bin\x1e/home/wrp/\x2econfig/emacs/bin\x1e/home/wrp/Applications\x1e/var/lib/flatpak/exports/bin/
