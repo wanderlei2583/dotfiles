@@ -16,6 +16,9 @@ lspconfig.servers = {
 	"jsonls",
 	"eslint",
 	"tailwindcss",
+	"marksman",
+	"prosemd_lsp",
+	"vale_ls",
 }
 
 -- list of servers configured with default config.
@@ -90,6 +93,37 @@ lspconfig.ts_ls.setup({
 			includeInlayEnumMemberValueHints = true,
 		},
 	},
+})
+
+-- Marksman (LSP principal para Markdown)
+lspconfig.marksman.setup({
+	filetypes = { "markdown", "markdown.mdx" },
+	root_dir = lspconfig.util.root_pattern(".git", ".marksman.toml"),
+	settings = {
+		markdown = {
+			-- Configurações específicas do Marksman
+			formatter = {
+				enabled = true,
+				formatOnSave = true,
+				lineLength = 80,
+			},
+			lint = {
+				enabled = true,
+				-- Regras personalizadas de linting
+				rules = {
+					"no-empty-links",
+					"no-empty-images",
+					"no-duplicate-headings",
+				},
+			},
+		},
+	},
+})
+
+-- Vale LSP (para linting de linguagem natural)
+lspconfig.vale_ls.setup({
+	filetypes = { "markdown", "text" },
+	root_dir = lspconfig.util.root_pattern(".vale.ini"),
 })
 
 -- HTML
