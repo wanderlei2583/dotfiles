@@ -6,7 +6,6 @@ This repository contains my personal dotfiles for NixOS, featuring configuration
 
 ```
 .
-├── .git
 ├── .zshrc
 ├── fish
 ├── kitty
