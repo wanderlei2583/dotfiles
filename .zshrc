@@ -17,7 +17,6 @@ alias sns='sudo nixos-rebuild switch'
 alias update='nix-channel --update'
 
 
-
 # Prompt do Starship
 eval "$(starship init zsh)"
 

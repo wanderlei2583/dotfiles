@@ -18,6 +18,8 @@ This repository contains my personal dotfiles for NixOS, featuring configuration
 
 ## Components
 
+***Wander_Dev*** 
+
 ### Shell Configuration
 - **zsh**: Z shell configuration files and customizations
 - **.zshrc**: Main Zsh configuration file

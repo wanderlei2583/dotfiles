@@ -23,3 +23,14 @@ vim.g.vim_markdown_frontmatter = 1
 vim.g.vim_markdown_strikethrough = 1
 vim.g.vim_markdown_math = 1
 vim.g.vim_markdown_checkboxes = 1
+
+-- Autocomandos para Markdown
+vim.cmd([[
+  augroup Markdown
+    autocmd!
+    autocmd FileType markdown setlocal wrap
+    autocmd FileType markdown setlocal spell
+    autocmd FileType markdown setlocal textwidth=80
+    autocmd FileType markdown setlocal conceallevel=0
+  augroup END
+]])
