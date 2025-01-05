@@ -1,5 +1,42 @@
 return {
 	{
+		"preservim/vim-markdown",
+		ft = "markdown",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("configs.vim-markdown").setup()
+		end,
+	},
+	{
+		"iamcco/markdown-preview.nvim",
+		cmd = { "MarkdownPreview" },
+		build = "cd app && npm install",
+		init = function()
+			vim.g.mkdp_filetypes = { "markdown" }
+		end,
+		ft = { "markdown" },
+	},
+	{
+		"lukas-reineke/headlines.nvim",
+		ft = "markdown",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPre", "BufNewFile" },
+		config = function()
+			require("configs.headlines").setup()
+		end,
+	},
+	{
+		"ellisonleao/glow.nvim",
+		ft = "markdown",
+		cmd = "Glow",
+		opts = {
+			style = "dark",
+			width = 120,
+			height_ratio = 0.7,
+			border = "rounded",
+		},
+	},
+	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
