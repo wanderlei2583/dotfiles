@@ -1,6 +1,7 @@
 # Configuração Personalizada do Neovim
+<!--YOUTUBE: agora sim icone do youtube OK!!! -->
 <!--FIX: Minhas configurações personalizadas.-->
-Este repositório contém minha configuração personalizada do Neovim, baseada no NvChad e estendida com plugins adicionais para melhorar minha produtividade e experiência de codificação.
+Este repositório contém minha configuração personalizada do Neovim, baseada no NvChad e estendida com plugins adicionais para melhorar minha  e experiência de codificação.
 ___
 ## Pré-requisitos
 
@@ -44,6 +45,7 @@ Para personalizar ainda mais sua configuração:
 1. Edite o arquivo `~/.config/nvim/lua/plugins/init.lua` para adicionar ou remover plugins.
 2. Modifique `~/.config/nvim/lua/init.lua` para ajustar configurações gerais.
 3. Use `~/.config/nvim/lua/configs/` para configurações específicas de plugins.
+
 
 ## Contribuição
 
