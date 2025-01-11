@@ -1,7 +1,7 @@
 local options = {
 	formatters_by_ft = {
 		lua = { "stylua" },
-		markdown = { "alex" },
+		markdown = { "marksman" },
 		css = { "prettier" },
 		html = { "prettier" },
 		c_cpp = { "clang-format" },

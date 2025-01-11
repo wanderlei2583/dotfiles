@@ -24,6 +24,15 @@ lspconfig.servers = {
 -- list of servers configured with default config.
 local default_servers = {
 	"pyright",
+	"cssls",
+	"ts_ls",
+	"html",
+	"jsonls",
+	"eslint",
+	"tailwindcss",
+	"marksman",
+	"prosemd_lsp",
+	"vale_ls",
 }
 
 -- lsps with default config
@@ -97,6 +106,7 @@ lspconfig.ts_ls.setup({
 
 -- Marksman (LSP principal para Markdown)
 lspconfig.marksman.setup({
+	cmd = { "marksman", "server" },
 	filetypes = { "markdown", "markdown.mdx" },
 	root_dir = lspconfig.util.root_pattern(".git", ".marksman.toml"),
 	settings = {
@@ -122,8 +132,10 @@ lspconfig.marksman.setup({
 
 -- Vale LSP (para linting de linguagem natural)
 lspconfig.vale_ls.setup({
-	filetypes = { "markdown", "text" },
+	filetypes = { "markdown", "rst", "tex", "text", "norg" },
 	root_dir = lspconfig.util.root_pattern(".vale.ini"),
+	cmd = { "vale-ls" },
+	single_file_support = true,
 })
 
 -- HTML

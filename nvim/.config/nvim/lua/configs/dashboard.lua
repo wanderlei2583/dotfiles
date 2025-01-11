@@ -5,7 +5,12 @@ local opts = {
 			enable = true,
 		},
 		shortcut = {
-			{ desc = "󰊳 Atualizar", group = "@property", action = "Lazy update", key = "u" },
+			{
+				desc = "󰊳 Atualizar",
+				group = "@property",
+				action = "Lazy update",
+				key = "u",
+			},
 			{
 				icon = " ",
 				icon_hl = "@variable",
@@ -13,18 +18,6 @@ local opts = {
 				group = "Label",
 				action = "Telescope find_files",
 				key = "f",
-			},
-			{
-				desc = " Aplicativos",
-				group = "DiagnosticHint",
-				action = "TelescopeApp",
-				key = "a",
-			},
-			{
-				desc = " dotfiles",
-				group = "Number",
-				action = "TelescopeDotfiles",
-				key = "d",
 			},
 		},
 	},

@@ -15,3 +15,9 @@ autocmd("BufWritePre", {
 		vim.lsp.buf.format({ async = false })
 	end,
 })
+
+-- Italics
+vim.opt.termguicolors = true -- Certifique-se de que as cores do terminal estão habilitadas
+-- Configuração de itálico para grupos de destaque
+vim.api.nvim_set_hl(0, "Comment", { italic = true }) -- Exemplo: Comentários em itálico
+vim.api.nvim_set_hl(0, "String", { italic = true }) -- Exemplo: Strings em itálico

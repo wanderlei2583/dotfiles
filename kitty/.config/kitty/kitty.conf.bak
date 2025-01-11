@@ -5,8 +5,7 @@
 #                /___/  
 #
 # Configuration
-# font_family                 FiraCode Nerd Font
-font_family                 Maple Mono
+font_family                 FiraCode Nerd Font
 font_size	                  12
 bold_font                   auto
 italic_font                 auto
@@ -23,12 +22,11 @@ wheel_scroll_min_lines      1
 enable_audio_bell           no
 window_padding_width        10
 hide_window_decorations     yes
-background_opacity          0.85
-background_blur             25
-dynamic_background_opacity  no
+background_opacity          0.8
+dynamic_background_opacity  yes
 confirm_os_window_close     0
-# selection_foreground        none
-# selection_background        none
+selection_foreground        none
+selection_background        none
 
 symbol_map U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols
 
@@ -37,10 +35,4 @@ include $HOME/.cache/wal/colors-kitty.conf
 
 # Include Custom Configuration
 # Create the file custom.conf in ~/.config/kitty to overwrite the default configuration
-include custom.conf
-
-
-# BEGIN_KITTY_THEME
-# Catppuccin-Mocha
-include current-theme.conf
-# END_KITTY_THEME
+include ./custom.conf

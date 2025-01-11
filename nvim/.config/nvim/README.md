@@ -1,5 +1,8 @@
 # Configuração Personalizada do Neovim
-<!--YOUTUBE: agora sim icone do youtube OK!!! -->
+See [reference].
+[reference]: /<https://github.com/wanderlei2583.git>  "Title"
+
+
 <!--FIX: Minhas configurações personalizadas.-->
 Este repositório contém minha configuração personalizada do Neovim, baseada no NvChad e estendida com plugins adicionais para melhorar minha  e experiência de codificação.
 ___
@@ -9,8 +12,11 @@ ___
 - [NvChad](https://nvchad.github.io/) instalado
 - Git
 - Lua 
-- [ ] LuaSnip
+- [—] LuaSnip
+- [x] Mason
+- [ ] LSP
 
+2025-01-05 21:35
 
 ## Plugins Utilizados
 
@@ -22,7 +28,7 @@ ___
 6. [Oil](https://github.com/stevearc/oil.nvim): Um gerenciador de arquivos para Neovim.
 7. [Todo Comments](https://github.com/folke/todo-comments.nvim): Destaca e pesquisa comentários TODO no código.
 8. [Treesitter](https://github.com/nvim-treesitter/nvim-treesitter): Parsing de código aprimorado.
-9. [Zen Mode](https://github.com/folke/zen-mode.nvim): Modo de foco para escrita ou codificação sem distrações.
+9. [Zen Mode](https://github.com/folke/zen-mode.nvim): Modo de foco para escrita ou codificação sem distrações. 
 
 ## Instalação
 

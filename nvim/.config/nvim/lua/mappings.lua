@@ -1,5 +1,11 @@
 require("nvchad.mappings")
 
+local function setup()
+	return "teste"
+end
+
+setup()
+
 -- add yours here
 local map = vim.keymap.set
 map("n", "-", "<CMD>Oil --float<CR>", { desc = "Abrir diretório atual." })
